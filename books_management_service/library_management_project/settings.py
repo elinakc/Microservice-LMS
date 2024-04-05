@@ -138,3 +138,10 @@ RABBITMQ = "amqps://vposmrrw:C3kfYDVd059rPsugtOUCsn89uvCqjMkS@armadillo.rmq.clou
 # Other settings ...
 
 
+#For Celery
+
+CELERY_BROKER_URL = 'amqps://vposmrrw:C3kfYDVd059rPsugtOUCsn89uvCqjMkS@armadillo.rmq.cloudamqp.com/vposmrrw'  # Example for RabbitMQ
+CELERY_RESULT_BACKEND = 'rpc://'  # Example for RPC result backend
+CELERY_ACCEPT_CONTENT = ['json']
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_RESULT_SERIALIZER = 'json'

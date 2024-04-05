@@ -7,7 +7,7 @@ from celery import Celery
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'library_management_project.settings')
 
 # Create a Celery app
-app = Celery('books_management_service')
+app = Celery('library_management_project')
 
 # Load configuration from Django settings
 app.config_from_object('django.conf:settings', namespace='CELERY')

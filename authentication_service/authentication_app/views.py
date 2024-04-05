@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from rest_framework.views import APIView
-from .serializers import UserRegistrationSerializers, UserLoginSerializers, UserLogoutSerializer
+from .serializers import UserRegistrationSerializers, UserLoginSerializers, UserLogoutSerializer,TokenObtainPairView
+
 from rest_framework.response import Response
 from rest_framework import status
 from django.contrib.auth import authenticate
@@ -35,3 +36,14 @@ class UserLogoutAPIView(APIView):
           serializer.logout(serializer.validated_data)
           return Response({"message": "Logout successful"}, status=status.HTTP_200_OK)
       return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+#For token generation
+class CustomTokenObtainPairView(TokenObtainPairView):
+    def post(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        if serializer.is_valid():
+            user = serializer.validated_data['user']
+            tokens = serializer.validated_data
+            # Customize response data if needed
+            return Response(tokens, status=status.HTTP_200_OK)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
